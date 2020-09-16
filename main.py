@@ -1,6 +1,7 @@
 bl_info = {
     "name": "Batch FBX Exporter", 
-    "category": "Object"
+    "category": "Object",
+    "blender": (2, 80, 0)
 }
 
 import bpy
@@ -16,11 +17,11 @@ class BatchExporter(bpy.types.Operator):
         for obj in objects:
             bpy.ops.object.select_all(action='DESELECT')
             path = bpy.path.abspath("//" + obj.name + ".fbx")
-            obj.select = True
+            obj.select_set(True)
             bpy.ops.export_scene.fbx(filepath=path, use_selection=True)        
         
         for obj in objects:
-            obj.select = True
+            obj.select_set(True)
 
         return { 'FINISHED' }
 
